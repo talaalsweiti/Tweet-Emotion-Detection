@@ -6,10 +6,17 @@ import qalsadi.lemmatizer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from emot.core import emot
 from nltk.stem.isri import ISRIStemmer
+from emot.emo_unicode import UNICODE_EMOJI
+
 
 def clean(sentence):
     def remove_diacritics(string):
         return araby.strip_diacritics(string)
+
+    def convert_emojis(text):
+        for emot in UNICODE_EMOJI:
+            text = text.replace(emot, "_".join(UNICODE_EMOJI[emot].replace(",", "").replace(":", "").split()))
+        return text
 
     re_general_pattern = r"https?:\/\/.*[\r\n]*|#\w+|@\w+|\.{2,}"
     re_repeating_character_pattern = r"(\w)\1{2,}"
@@ -41,16 +48,20 @@ def clean(sentence):
     # 7- Lemmatization
     sequence = [lemmatizer.lemmatize(token) for token in sequence]
 
-    cleanedTweet = []
+    cleanedTweetList = []
 
     # remove stop words
     for cleanWord in sequence:
         cleanWord = st.stem(cleanWord)
         if cleanWord not in stopWords:
-            cleanedTweet.append(cleanWord)
+            cleanedTweetList.append(cleanWord)
 
     # concatenate emojis
     for emoji in emojis['value']:
-        cleanedTweet.append(emoji)
+        cleanedTweetList.append(convert_emojis(emoji))
+
+    cleanedTweet = ' '.join([str(elem) for elem in cleanedTweetList])
+
+    # convert_emojis(cleanedTweet)
 
     return cleanedTweet

@@ -3,9 +3,18 @@ import pandas as pd
 
 import jinja2
 
-def calculate(data):
+import pickle
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
 
+from Training.RandomForest import randomForest
+
+
+def calculate(data, labels):
     vectorizer = TfidfVectorizer()
+    # X, y = load_diabetes(return_X_y=True, as_frame=True)
+    # X.head()
 
     # produce tfidf values
     X = vectorizer.fit_transform(data)
@@ -18,6 +27,11 @@ def calculate(data):
 
     df = pd.DataFrame(X.todense(), index=corpus_index, columns=feature_names)
     df.style
-    df.to_csv("Input/result", sep='\t', encoding='utf-8')
 
+    # df.to_csv("Input/result", sep='\t', encoding='utf-8')
+
+    # print(len(X)," ",len(labels))
+    # print(X)
+
+    randomForest(X, labels)
     # print(df)

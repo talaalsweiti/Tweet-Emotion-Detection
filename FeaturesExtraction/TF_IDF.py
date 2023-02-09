@@ -23,9 +23,9 @@ def calculate(data, labels):
     feature_names = vectorizer.get_feature_names_out()
 
     # I used the 5 sentences to index the table produced
-    corpus_index = [sentence for sentence in data]
+    tweet_index = [sentence for sentence in data]
 
-    df = pd.DataFrame(X.todense(), index=corpus_index, columns=feature_names)
+    df = pd.DataFrame(X.todense(), index=tweet_index, columns=feature_names)
     df.style
 
     # df.to_csv("Input/result", sep='\t', encoding='utf-8')

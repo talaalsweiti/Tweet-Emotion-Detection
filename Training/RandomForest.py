@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 def randomForest(X, y):
-    # refer to the figure above to better understand this line
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # n_estimators is the number of trees in the forest, this can be
@@ -24,13 +24,18 @@ def randomForest(X, y):
     print('\n'"Accuracy of our Random Forest Classifier is: ",
           metrics.accuracy_score(y_test, y_pred) * 100, "\n")
 
-    class_names = ["pos", "neg"]
+    class_names = ["pos","neg"]
 
     # plot non-normalized confusion matrix
     titles_options = [
         ("Confusion matrix, without normalization", None),
         ("Normalized confusion matrix", "true"),
     ]
+
+    print(y_test)
+
+
+    # print(X_test.shape[0] , " " , len(y_test))
     for title, normalize in titles_options:
         disp = ConfusionMatrixDisplay.from_estimator(
             classifier,

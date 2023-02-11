@@ -2,29 +2,32 @@ import pandas as pd
 
 from FeaturesExtraction.TF_IDF import calculate
 from Preprocessing.CleanData import clean
+from Training.RandomForest import randomForest
 
 if __name__ == '__main__':
 
     negativeTweetsFile = pd.read_csv('Input/Negative+Tweets.tsv', sep='\t')
-    negativeTweets = []
-
     positiveTweetsFile = pd.read_csv('Input/Positive+Tweets.tsv', sep='\t')
-    positiveTweets = []
-    positiveLabels = []
+
+    tweets = {}
+    labels = []
+    print("Cleaning started")
 
     for i in range(len(negativeTweetsFile)):
-        negativeTweets.append(clean(negativeTweetsFile.iloc[i][0]))
-
-
+        tweets[clean(negativeTweetsFile.iloc[i][0])] = "neg"
 
     for i in range(len(positiveTweetsFile)):
-        positiveTweets.append(clean(positiveTweetsFile.iloc[i][0]))
-        positiveLabels.append("pos")
+        tweets[clean(positiveTweetsFile.iloc[i][0])] = "pos"
 
+    print("Cleaning finished")
 
-    # for i in range(1):
-    #     print(positiveTweetsFile.iloc[i][1])
-    #     print(positiveTweets[i])
-    #     print()
-    # print(len(positiveTweetsFile))
-    # calculate(positiveTweets, positiveLabels)
+    cleanedTweets = []
+    for tweet in tweets:
+        cleanedTweets.append(tweet)
+        labels.append(tweets[tweet])
+
+    X = calculate(cleanedTweets)
+
+    print("Calculating finished")
+
+    randomForest(X, labels)

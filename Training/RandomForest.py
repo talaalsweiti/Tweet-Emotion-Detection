@@ -1,3 +1,5 @@
+import pickle
+
 import numpy as np
 from sklearn import metrics
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -7,7 +9,6 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 def randomForest(X, y):
-
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # n_estimators is the number of trees in the forest, this can be
@@ -24,7 +25,7 @@ def randomForest(X, y):
     print('\n'"Accuracy of our Random Forest Classifier is: ",
           metrics.accuracy_score(y_test, y_pred) * 100, "\n")
 
-    class_names = ["pos","neg"]
+    class_names = ["pos", "neg"]
 
     # plot non-normalized confusion matrix
     titles_options = [
@@ -32,8 +33,7 @@ def randomForest(X, y):
         ("Normalized confusion matrix", "true"),
     ]
 
-    print(y_test)
-
+    pickle.dump(RForest_clf, open('model.pk1', 'wb'))
 
     # print(X_test.shape[0] , " " , len(y_test))
     for title, normalize in titles_options:

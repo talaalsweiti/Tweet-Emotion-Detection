@@ -4,7 +4,8 @@ import pandas as pd
 
 from FeaturesExtraction.TF_IDF import extract_features
 from Preprocessing.CleanData import clean
-from Training.RandomForest import classical_random_forest, five_foldes_random_forest
+from Training.NeuralNetwork import classical_neural_network
+from Training.RandomForest import classical_random_forest, five_folds_random_forest
 
 
 def read_given_data():
@@ -39,6 +40,7 @@ if __name__ == '__main__':
         cleaned_tweets.append(cleaned_tweets_file.iloc[i][1])
 
     X = extract_features(cleaned_tweets)
-
-    classical_random_forest(X, labels)
-    five_foldes_random_forest(X,labels)
+    classical_neural_network(X,labels)
+    # classical_random_forest(X, labels)
+    #
+    # five_folds_random_forest(X, labels)

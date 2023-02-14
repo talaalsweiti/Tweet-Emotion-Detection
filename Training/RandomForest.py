@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import KFold
 
 
-def five_foldes_random_forest(X, y):
+def five_folds_random_forest(X, y):
     kf = KFold(n_splits=5,shuffle=True)
 
     # this is where splitting is done, i is the number of folds

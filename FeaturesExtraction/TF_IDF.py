@@ -1,3 +1,5 @@
+import csv
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
@@ -15,5 +17,6 @@ def extract_features(tweets):
 
     df = pd.DataFrame(X.todense(), index=tweet_index, columns=feature_names)
     df.style
+
 
     return X

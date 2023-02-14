@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 
 
-def randomForest(X, y):
+def random_forest(X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
     # n_estimators is the number of trees in the forest, this can be
     # a parameter that you can play with to fine tune your model
-    RForest_clf = RandomForestClassifier(n_estimators=100)
+    RForest_clf = RandomForestClassifier(n_estimators=25)
 
     # train the model using 25% of the dataset
     classifier = RForest_clf.fit(X_train, y_train)
@@ -33,7 +33,7 @@ def randomForest(X, y):
         ("Normalized confusion matrix", "true"),
     ]
 
-    pickle.dump(RForest_clf, open('model.pk1', 'wb'))
+    pickle.dump(RForest_clf, open('model_25.pk1', 'wb'))
 
     # print(X_test.shape[0] , " " , len(y_test))
     for title, normalize in titles_options:

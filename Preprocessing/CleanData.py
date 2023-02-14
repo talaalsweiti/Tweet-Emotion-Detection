@@ -23,11 +23,11 @@ def clean(sentence):
     lemmatizer = qalsadi.lemmatizer.Lemmatizer()
     st = ISRIStemmer()
 
-    stopWordsFile = open("Preprocessing/stopwords.txt", "r", encoding='utf-8')
-    stopWordsList = stopWordsFile.readlines()
-    stopWords = []
-    for word in stopWordsList:
-        stopWords.append(word.replace("\n", ""))
+    stop_words_file = open("Preprocessing/stopwords.txt", "r", encoding='utf-8')
+    stop_words_list = stop_words_file.readlines()
+    stop_words = []
+    for word in stop_words_list:
+        stop_words.append(word.replace("\n", ""))
 
     # 1- Removing URLs, Hashtags, Mentions, and repeating dots
     sentence = re.sub(re_general_pattern, "", sentence)
@@ -48,20 +48,20 @@ def clean(sentence):
     # 7- Lemmatization
     sequence = [lemmatizer.lemmatize(token) for token in sequence]
 
-    cleanedTweetList = []
+    cleaned_tweets_list = []
 
     # remove stop words
     for cleanWord in sequence:
         cleanWord = st.stem(cleanWord)
-        if cleanWord not in stopWords:
-            cleanedTweetList.append(cleanWord)
+        if cleanWord not in stop_words:
+            cleaned_tweets_list.append(cleanWord)
 
     # concatenate emojis
     for emoji in emojis['value']:
-        cleanedTweetList.append(convert_emojis(emoji))
+        cleaned_tweets_list.append(convert_emojis(emoji))
 
-    cleanedTweet = ' '.join([str(elem) for elem in cleanedTweetList])
+    cleaned_tweets = ' '.join([str(elem) for elem in cleaned_tweets_list])
 
-    # convert_emojis(cleanedTweet)
+    # convert_emojis(cleaned_tweets)
 
-    return cleanedTweet
+    return cleaned_tweets

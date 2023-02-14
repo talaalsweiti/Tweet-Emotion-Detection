@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
 
-def calculate(tweets):
+def extract_features(tweets):
     vectorizer = TfidfVectorizer()
 
     # produce tfidf values
@@ -11,7 +11,6 @@ def calculate(tweets):
     # These are our words/tokens to be used as column names
     feature_names = vectorizer.get_feature_names_out()
 
-    # I used the 5 sentences to index the table produced
     tweet_index = [sentence for sentence in tweets]
 
     df = pd.DataFrame(X.todense(), index=tweet_index, columns=feature_names)

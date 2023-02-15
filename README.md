@@ -8,7 +8,11 @@ The aim of this project is to develop an automated solution that predicts the em
 
 ---
 
-## What is this project?
+## Problem Formalization 
+Input: A dataset of tweets, each labeled with a sentiment class (positive and negative).
+Output: A model that can predict the sentiment of new, unseen tweets.
+Objective: Develop a machine learning model that can accurately classify the sentiment of a tweet, with a focus on high accuracy, precision, recall, and F1-score.
+Approach: This problem can be approached using traditional machine learning algorithms such as Naive Bayes, SVM, and Random Forest. The approach should include data preprocessing and feature extraction, model training and evaluation.
 
 
 

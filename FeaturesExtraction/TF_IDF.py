@@ -12,11 +12,9 @@ def extract_features(tweets):
 
     # These are our words/tokens to be used as column names
     feature_names = vectorizer.get_feature_names_out()
-
-    tweet_index = [sentence for sentence in tweets]
+    tweet_index = [tweet for tweet in tweets]
 
     df = pd.DataFrame(X.todense(), index=tweet_index, columns=feature_names)
     df.style
-
 
     return X

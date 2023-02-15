@@ -1,28 +1,33 @@
 import pickle
 
 from sklearn import metrics
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score
+from sklearn.model_selection import train_test_split, cross_val_score, cross_val_predict
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import KFold
 
 
+
 def five_folds_random_forest(X, y):
-    kf = KFold(n_splits=5,shuffle=True)
+    rf = RandomForestClassifier()
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+    scores = cross_val_score(rf, X, y, cv=kf, scoring='accuracy')
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+    y_pred = cross_val_predict(rf, X, y, cv=kf)
 
-    # this is where splitting is done, i is the number of folds
-    # train_index holds the indices of the training tweets (4/5 of the data)
-    # test_index holds the indices of the testing tweets (1/5 of the data)
-    for i, (train_index, test_index) in enumerate(kf.split(X)):
+    accuracy = [accuracy_score(y[kf.test_fold == i], y_pred[kf.test_fold == i]) for i in range(5)]
+    print("Accuracy for each fold:", accuracy)
 
-        print(f"\nFold {i} training data:\n")
-        # for index in train_index - 1:
-        #     print(X[train_index[index]], "-", y[train_index[index]])
-
-        print(f"\nFold {i} testing data:\n")
-        print(X[test_index[0]].data, "-", y[test_index[0]])
-        print("------------------------------")
+    # Create a plot of the predicted values and true target values for each fold
+    fig, ax = plt.subplots()
+    ax.plot(y, 'ro', label='True Values')
+    ax.plot(y_pred, 'bx', label='Predicted Values')
+    ax.legend()
+    ax.set_xlabel('Sample Index')
+    ax.set_ylabel('Class Label')
+    ax.set_title('Random Forest Predictions - 5-fold Cross Validation')
+    plt.show()
 
 
 def classical_random_forest(X, y):
@@ -30,11 +35,9 @@ def classical_random_forest(X, y):
 
     # n_estimators is the number of trees in the forest
     RForest_clf = RandomForestClassifier(n_estimators=25)
-
-    # train the model using 25% of the dataset
+    # train the model using 75% of the dataset
     classifier = RForest_clf.fit(X_train, y_train)
-
-    # test the model using the remaining 75% of the dataset
+    # test the model using the remaining 25% of the dataset
     y_pred = RForest_clf.predict(X_test)
 
     # find the accuracy
@@ -58,7 +61,7 @@ def classical_random_forest(X, y):
         ("Normalized confusion matrix", "true"),
     ]
 
-    pickle.dump(RForest_clf, open('model_25.pk1', 'wb'))
+    # pickle.dump(RForest_clf, open('model_25.pk1', 'wb'))
 
     for title, normalize in titles_options:
         disp = ConfusionMatrixDisplay.from_estimator(

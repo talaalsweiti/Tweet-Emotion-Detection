@@ -1,6 +1,7 @@
 import csv
 
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 from FeaturesExtraction.TF_IDF import extract_features
 from Preprocessing.CleanData import clean
@@ -40,7 +41,7 @@ if __name__ == '__main__':
         cleaned_tweets.append(cleaned_tweets_file.iloc[i][1])
 
     X = extract_features(cleaned_tweets)
-    classical_neural_network(X,labels)
+
+    # classical_neural_network(X,labels)
     # classical_random_forest(X, labels)
-    #
     # five_folds_random_forest(X, labels)

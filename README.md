@@ -59,7 +59,7 @@ The evaluation for the performance for each classification model was based on th
 ---
 ## Languages And Tools:
 
-- <img align="left" alt="scikit learning" width="40px" src="https://github.com/scikit-learn/scikit-learn/blob/main/doc/logos/1280px-scikit-learn-logo.png?raw=true" /> <img align="left" alt="GitHub" width="50px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
+- <img align="left" alt="Python" width="40px" src="https://www.pngfind.com/pngs/m/62-626208_python-logo-png-transparent-background-python-logo-png.png" /> <img align="left" alt="scikit learning" width="40px" src="https://github.com/scikit-learn/scikit-learn/blob/main/doc/logos/1280px-scikit-learn-logo.png?raw=true" /> <img align="left" alt="GitHub" width="50px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
 <br/>
 
 ---

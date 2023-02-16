@@ -5,7 +5,7 @@ from sklearn.metrics import ConfusionMatrixDisplay, classification_report
 
 def display_results(y_test, y_pred, X_test, classifier, model):
     # find the accuracy
-    print(f"Accuracy of our {model} Classifier is:{metrics.accuracy_score(y_test, y_pred) * 100} \n")
+    print(f"Accuracy of our {model} Classifier is: {metrics.accuracy_score(y_test, y_pred) * 100} \n")
 
     print(classification_report(y_test, y_pred))
 

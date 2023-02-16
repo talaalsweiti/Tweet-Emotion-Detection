@@ -2,11 +2,10 @@ import re
 
 import pyarabic.araby as araby  # for removing diacritics
 import qalsadi.lemmatizer
-
-from nltk.tokenize import sent_tokenize, word_tokenize
 from emot.core import emot
-from nltk.stem.isri import ISRIStemmer
 from emot.emo_unicode import UNICODE_EMOJI
+from nltk.stem.isri import ISRIStemmer
+from nltk.tokenize import word_tokenize
 
 
 def clean(sentence):

@@ -45,7 +45,7 @@ def classical_naive_bayes(X, y):
     # Use the classifier to make predictions on the testing data
     y_pred = nb_classifier.predict(X_test)
 
-    with open('classical_naive_bayes.pkl', 'wb') as f:
-        pickle.dump(classifier, f)
+    # with open('classical_naive_bayes.pkl', 'wb') as f:
+    #     pickle.dump(classifier, f)
 
     display_results(y_test, y_pred, X_test, classifier, "Naive Bayes")

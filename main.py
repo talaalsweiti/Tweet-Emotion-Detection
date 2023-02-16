@@ -16,14 +16,20 @@ labels = []
 X = []
 
 
+def display_mini_menu():
+    print("Press 1 if you want to test unseen data")
+    print("Else to return to main menu")
+
+
+
 def display_menu():
     print("Choose an option: ")
-    print("1- Show Random Forest results for unseen data using classical method")
+    print("1- Show Random Forest results using classical method")
     print("2- Show Random Forest results using 5-folds cross validation")
-    print("3- Show Naive Bayes results for unseen data using classical method")
+    print("3- Show Naive Bayes results using classical method")
     print("4- Show Naive Bayes results using 5-folds cross validation")
-    print("5- Show Random Forest results for unseen data using 5-folds cross validation")
-    print("6- Comparison between the three algorithm")
+    print("5- Show SVM results using classical method")
+    print("6- Show SVM results using 5-folds cross validation")
     print("Else - Exit")
 
 
@@ -58,28 +64,41 @@ if __name__ == '__main__':
         display_menu()
         val = input()
         if val == "1":
-            with open('Models/classical_random_forest.pkl', 'rb') as file:
-                classifier_model = pickle.load(file)
-            test(tfidf, classifier_model, "Classical Random Forest")
+            classical_random_forest(X, labels)
+            display_mini_menu()
+            val2 = input()
+            if val2 == "1":
+                with open('Models/classical_random_forest.pkl', 'rb') as file:
+                    classifier_model = pickle.load(file)
+                test(tfidf, classifier_model, "Classical Random Forest")
 
         elif val == "2":
-            five_folds_random_forest(X, labels,cleaned_tweets)
+            five_folds_random_forest(X, labels, cleaned_tweets)
 
         elif val == "3":
-            with open('Models/classical_naive_bayes.pkl', 'rb') as file:
-                classifier_model = pickle.load(file)
-            test(tfidf, classifier_model, "Classical Naive Bayes")
+
+            classical_naive_bayes(X,labels)
+            display_mini_menu()
+            val2 = input()
+            if val2 == "1":
+                with open('Models/classical_naive_bayes.pkl', 'rb') as file:
+                    classifier_model = pickle.load(file)
+                test(tfidf, classifier_model, "Classical Naive Bayes")
 
         elif val == "4":
-            five_folds_svm(X, labels,cleaned_tweets)
+            five_folds_naive_bayes(X, labels, cleaned_tweets)
 
         elif val == "5":
-            with open('Models/classical_svm.pkl', 'rb') as file:
-                classifier_model = pickle.load(file)
-            test(tfidf, classifier_model, "Classical SVM")
+            classical_svm(X,labels)
+            display_mini_menu()
+            val2 = input()
+            if val2 == "1":
+                with open('Models/classical_svm.pkl', 'rb') as file:
+                    classifier_model = pickle.load(file)
+                test(tfidf, classifier_model, "Classical SVM")
 
         elif val == "6":
-            five_folds_svm(X, labels,cleaned_tweets)
+            five_folds_svm(X, labels, cleaned_tweets)
 
         else:
             sys.exit("Thank you for using or program!")

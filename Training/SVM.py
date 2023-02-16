@@ -43,7 +43,7 @@ def classical_svm(X, y):
     # Test the classifier on the testing set and print the accuracy score
     y_pred = clf.predict(X_test)
 
-    with open('classical_svm.pkl', 'wb') as f:
-        pickle.dump(classifier, f)
+    # with open('classical_svm.pkl', 'wb') as f:
+    #     pickle.dump(classifier, f)
 
     display_results(y_test, y_pred, X_test, classifier, "SVM")

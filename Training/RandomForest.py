@@ -43,6 +43,6 @@ def classical_random_forest(X, y):
     classifier = RForest_clf.fit(X_train, y_train)
     y_pred = RForest_clf.predict(X_test)
     # Save the trained model to a file using pickle
-    with open('classical_random_forest.pkl', 'wb') as f:
-        pickle.dump(classifier, f)
+    # with open('classical_random_forest.pkl', 'wb') as f:
+    #     pickle.dump(classifier, f)
     display_results(y_test, y_pred, X_test, classifier, "Random Forest")
